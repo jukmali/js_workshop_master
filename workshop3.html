@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Workshop 3</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script>
+            <!-- JavaScript goes here -->
+        </script>
+    </head>
+    <body class="ws3">
+        <h1>Workshop 3: JavaScript Events</h1>
+        <hr />
+        <p>In this exercise we will practice the use of JavaScript events. Use the lecture-material as a reference guide side by side with these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use.</p>
+        <hr/>
+        <h2>Exercise 1</h2>
+        <p>Below you will see three buttons. Edit the source code and add an onClick-events to these buttons.</p>
+        <p>
+          <button>Click me</button>
+          <button>Show table</button>
+          <button>Geolocation</button>
+        </p>
+
+        <ol>
+          <li>The first button should open an alert-button, which will say "You clicked me!" </li>
+          <li> When you see the button working, add the current date after the text by using the Date() -function.</li>
+          <li>The second button should call a function called showTable()". ShowTable function should output a simple HTML-table (below) to the page. Use document.write to print data. Feel free to modify the data on the table.</li>
+        </ol>
+        <table id="example" class="display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>$320,800</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Accountant</td>
+                    <td>$170,750</td>
+                </tr>
+                <tr>
+                    <td>Ashton Cox</td>
+                    <td>Junior Technical Author</td>
+                    <td>$86,000</td>
+                </tr>
+                <tr>
+                    <td>Cedric Kelly</td>
+                    <td>Senior Javascript Developer</td>
+                    <td>$433,060</td>
+                </tr>
+                <tr>
+                    <td>Airi Satou</td>
+                    <td>Accountant</td>
+                    <td>$162,700</td>
+                </tr>              
+            </tbody>
+        </table>
+        <ol start="4">
+            <li>The last button should check Geolocation of the user, and output it to the console and to the page. Note: Some browsers might not allow you to do this. Try different browsers if you get errors.</li>
+        </ol>
+        <hr/>
+        <h2>Exercise 2</h2>
+        <ul>
+            <li>Add an&nbsp;onMouseOver event on the&nbsp;Heading "Exercise 2" of this page.&nbsp;It should&nbsp;fire when the users mouse is moved 
+        over&nbsp;it. Output "Stepped over my a mouse!" on the console.</li>
+            <li>Add another event, which will fire then the mouse leaves the Exercise 2 -heading. This time show an alert window to the user saying: "Bye bye mouse!"</li>
+        </ul>
+        <hr/>
+        <h2>Exercise 3</h2>
+        <p>Below you will see a simple form.</p>
+        <ul>
+          <li>Add onfocus -event to the&nbsp;textarea below. When the user enters the textarea, it should show a text saying: "Please fill in the form with proper data.". You can try modifying the background color of the box as well. &nbsp;</li>
+          <li>Try to use onkeydown -event on the textarea. It should calculate the number of keypresses and output them on the screen. Could you think other smart ways to use it?</li>
+          <li>When the form button is clicked, check if the textarea is empty. Notify the user with appropriate message. HINT: You can access the Textarea using the following command:   <i>document.getElementById("textdata").value</i>. We will study the forms deeper in Workshops 4 and 5.</li>
+        </ul>
+        <form>
+            <textarea id="textdata"></textarea><br>
+            <span id="charcount"></span>
+            <button>Send me</button>
+        </form>
+        <hr/>
+        <h2>Exercise 4</h2>
+        <div id="coordinates"></div>
+        <p>Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first outputting to the console using console.log.</p>
+        <p> When the program is working, you can try outputting the text on the H2 element with an id "coords" the box</p> 
+        <p>HINT: You need to use document.getElementById("coordinates").innerHTML to achieve this.</p>
+    </body>
+</html>
+
+

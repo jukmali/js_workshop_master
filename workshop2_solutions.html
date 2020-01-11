@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Workshop 2</title>
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<h1>Workshop 2: JavaScript BOM</h1>
+		<hr />
+		<p>In this exercise we will practice the use of BOM. Use the lecture-material as a reference guide side by side these exercises. It might also 
+		be a good idea to save the lines of code you write during the exercises for later use.</p>
+		
+		<h2>Exercise 1</h2>
+		<p>Add JavaScript commands in the script-tag of this page, which will write the following text on the browser page. Use HTML-tags to produce the text styles to the 
+		page. <br />
+		  <br />
+		  <em><strong>"If I had nine hours to chop down a tree, I'd spend the first six sharpening my ax."</strong> <br />
+		  -- Abraham Lincoln</em></p>
+		
+		<h2>Exercise 2</h2>
+		<p>Create a JavaScript function called repeatingText. It writes out a line of text to the page 50 times.</p>
+		
+		<h2>Exercise 3</h2>
+		<p>Create a JavaScript if-statement, which checks if the user is using Mozilla browser. If it is, the browser should load http://www.mozilla.org" page. If not, the browser 
+		should load some other website. Create simple pages to test the code.</p>
+		
+		<h2>Exercise 4</h2>
+		<p>Create a simple web page, where JavaScript confirm-dialog will pop out asking if the user is a student or not. If the user clicks OK write "Welcome student" to the 
+		page. If the user clicks cancel, write on the page: "Sorry, this page is for students only".</p>
+		
+		<h2>Exercise 5</h2>
+		Use document.write to output an image tag with a real image to the page. When you're done, try writing a JavaScript function to display a random image from the following list of images. HINT: You can access individual images using the table index.  Images[0] for example contains the url: "<a href="http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg">http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg</a>".
+
+		<pre>
+			var images =[
+				"http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg", 
+				"http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg", 
+				"http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"
+			];
+		</pre>
+		<script>
+            // EX. 1
+            // NOTE: Special characters require backslash in front of them, \"
+            document.write("<i><strong>\"If I had nine hours to chop down a tree, I’d spend the first six sharpening my ax.\"</strong><br>– Abraham Lincoln</i>");
+
+            // DEMO, we can also write IMG -tags
+            // and other content which is loaded from the web
+            document.write("<img src='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnolDrUSX-NZBCKTjPLoliz1NLTFzQ2zZMM_Pz6x91A8mwz34r'>");
+
+            // EX. 2
+            function repeatingText() {
+                for (var i=0; i < 50; i++){
+                    document.write("Hello World!");
+                }
+            }
+            repeatingText();
+
+            // EX. 3
+            if (navigator == navigator.userAgent.indexOf("Firefox") < 0 ) {
+                alert("Ei ole firefox");
+                //location.href = "http://www.microsoft.com";
+            }else {
+                // DO SOMETHING ELSE
+                //location.href = "http://www.microsoft.com"
+            }
+
+            // 2
+            function repeatingText(){
+                for(var i=0; i < 50; i++){
+                    document.write("Hoi maailma!<br>");
+                }
+            }
+            repeatingText();
+
+            // 3 esim.
+            if ( navigator.userAgent.indexOf("Edge") > -1 ){
+                //navigator.href="http://www.microsoft.com";
+            }
+            else{
+                //navigator.href="http://www.hs.fi"
+            }
+
+            // or
+            if (navigator.appname ="Mozilla"){
+                navigator.href="http://www.microsoft.com";
+            }
+            else{
+                navigator.href="http://www.hs.fi"
+            }
+            // 4
+            if (confirm('Where to go?') == true){
+                console.log("You pressed ok");
+            }
+            else {
+                console.log("You pressed Cancel");
+            }
+
+            //5
+            var number = Math.round(Math.random() *2);
+
+            var images =[
+                "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+                "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+                "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"
+            ];
+
+            document.write("<img src='https://cdn-images-1.medium.com/max/1600/1*ot7tWiPCYC01pV0kGmK3qQ.png'>");
+
+            document.images[0].src = images[number];
+		</script>
+	</body>
+</html>

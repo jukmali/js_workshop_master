@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Workshop 9 - Solutions</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div id="main-content">
+            <h1>Workshop 9: Using jQuery</h1><hr />
+            <p>In this exercise we will practice the use of jQuery JavaScript library. Use the lecture-material as a reference guide side by side 
+            these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use.</p>
+            <p>To make things interesting, do these exercises on the Demosite -page, which will have a more complex structure and layout.</p>
+            <h2>Exercise 1: Adding jQuery to document</h2>
+            <p>In order to get jQuery-functions available to your webpage, you need to add the jQuery library as part of your page. This can be 
+            done by adding a script tag, which will reference to jQuery online or to a local file.</p>
+            <pre>
+            &lt;script src=&quot;https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="crossorigin="anonymous"&gt;&lt;/script&gt;
+            </pre>
+            <p>Go Ahead and add the line above to this pages HTML-code. Then reload the page. You can make sure that jQuery is up and 
+            running by typing $ at the console. </p>
+            <hr/>
+            <h2>Exercise 2: Basic Dom Scripting</h2>
+            <p>So far, we have created JavaScript by hooking the code to a button etc. A good way to learn jQuery (and JavaScript) is to try 
+            things in the console. So open the Developer Tools (F12) and try to accomplish the following tasks. </p>
+            <p>How would you:</p>
+            <ol>
+              <li>Find a reference to all H3 -tags? / <span class="red">$('h3')</span></li>
+              <li>Find a reference to div with an id='contant' and replace the contents with a text of your choice.  / <span class="red">$('#contant').html('test')</span></li>
+              <li>Find a reference to the img and replace the src attribute with some other image online? / <span class="red">$('img').attr('src', 'https://www.laurea.fi/SiteAssets/laurea_logo.png')</span></li>
+              <li>Find the element with a class sideBarListBox and show/hide it? / <span class="red">$('.sideBarListBox').hide()
+    </span></li>
+              <li>Find any li element that contains the text &quot;Lorem&quot; and add css underline -attribute to them? / <span class="red">$("li:contains('Lorem')").css('text-decoration', 'underline')</span></li>
+              <li>Find all the anchor tags within the class SideBarListBox and apply css modifications of your choice to them. / <span class="red">$('.sideBarListBox a').css('font-size', '150%')</span></li>
+            </ol>
+            <hr/>
+            <h2>Exercise 3: Effects and animation</h2>
+            <p>See: <a href="https://api.jquery.com/category/effects/" target="_blank">https://api.jquery.com/category/effects/</a></p>
+            <p>Add the following functionality to buttons below:</p>
+            <p>
+                <input type="button" name="button" id="button" value="Fade in H1">
+                <input type="button" name="button2" id="button2" value="Fade out H1">
+                <input type="button" name="button3" id="button3" value="SlideUp main contents">
+                <input type="button" name="button4" id="button4" value="SlideDown main contents">
+                <input type="button" name="button5" id="button5" value="Animate">
+            </p>
+            <ol>
+                <li>Fade in the main heading of the page</li>
+                <li>Fade out the main heading of the page</li>
+                <li>SlideUp the main contents of the page</li>
+                <li>SlideDown the main contents of the page</li>
+                <li>Study the animate() -function. Write an animation sequence of your own on the page</li>
+            </ol>
+            <hr/>
+            <h2>Exercise 4: Ajax</h2>
+            <ol>
+                <li>First try Ajax with console. Use load() -function to inject content from the web (ex. <a href="http://www.iltalehti.fi/rss.xml" target="_blank">http://www.iltalehti.fi/rss.xml</a>) into the div below.</li>
+                <li>Then write a JavaScript function, which will fire when the pulldown menu item is changed. Each selection loads a different content from web to the div below. </li>
+                <li>Change the pulldown item names accordingly as well.</li>
+            </ol>
+            <p>Select an item from the list.</p>
+            <p>
+                <select name="mySelect" id="mySelect" onchange="">
+                    <option value="first">Yahoo</option>
+                    <option value="second">Second item</option>
+                    <option value="third">Third item</option>
+                </select>
+            </p>
+            <div id="ajax">
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <script>
+            <!-- JavaScript goes here -->
+            $('#button').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                $('h1').hide();
+                $('h1').fadeIn(1800);
+            });
+            $('#button2').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                $('h1').fadeOut(1800);
+            });
+            $('#button3').click(function() {
+                $('#main-content').slideUp(1800);
+            });
+            $('#button4').click(function() {
+                $('#main-content').hide();
+                $('#main-content').slideDown(1800);
+            });
+            $('#button5').click(function() {
+                $('#button5').animate({width: "550px", fontSize: "150%"}, 1800);
+                $('#button5').animate({width: "150px", fontSize: "13.3333px"}, 1800);
+            });
+            $('#mySelect').change(function() {
+                if(this.value == 'first') {
+                    $('#ajax').load('https://meijastiina.github.io/news_rss_topstories.xml');
+                } else if (this.value == 'second') {
+                    $('#ajax').load('https://meijastiina.github.io/ajax_example.txt');
+                } else {
+                    $('#ajax').html('Not found');
+                }
+            });
+        </script>
+    </body>
+</html>
