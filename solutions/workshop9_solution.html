@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Workshop 9 - Solutions</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div id="navbarListBox" style="background-color: lightgray; width:100%; height:100px;display:none;">
+            <h3>Menu</h3>
+            <input type="button" name="navbutton" id="navbutton" value="Nav button1" style="margin-left:30px;width:10%; margin-right:30px;">
+            <input type="button" name="navbutton2" id="navbutton2" value="Nav button2" style="width:10%; margin-right:30px;" >
+            <input type="button" name="navbutton3" id="navbutton3" value="Nav button3"style="width:10%; margin-right:30px;">
+        </div>
+        
+        <div id="main-content">
+            <h1>Workshop 9: Using jQuery</h1><hr />
+            <p>In this exercise we will practice the use of jQuery JavaScript library. Use the lecture-material as a reference guide side by side 
+            these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use.</p>
+            <p>To make things interesting, do these exercises on the Demosite -page, which will have a more complex structure and layout.</p>
+            <h2>Exercise 1: Adding jQuery to document</h2>
+            <p>In order to get jQuery-functions available to your webpage, you need to add the jQuery library as part of your page. This can be 
+            done by adding a script tag, which will reference to jQuery online or to a local file.</p>
+            <pre>
+            &lt;script src=&quot;https://code.jquery.com/jquery-3.1.1.js" 
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"&gt;&lt;/script&gt;
+            </pre>
+            <p>Go Ahead and add the line above to this pages HTML-code. Then reload the page. You can make sure that jQuery is up and 
+            running by typing $ at the console. </p>
+            <hr/>
+            <h2>Exercise 2: Basic Dom Scripting</h2>
+            <p>So far, we have created JavaScript by hooking the code to a button etc. A good way to learn jQuery (and JavaScript) is to try 
+            things in the console. So open the Developer Tools (F12) and try to accomplish the following tasks. </p>
+            <p>How would you:</p>
+            <ol>
+              <li>Find a reference to all H2 -tags and change text? / <span class="red">$('h2').text('hups')</span></li>
+              <li>Find a reference to div with an id='tryContant' and replace the contents with a text of your choice.  / <span class="red">$('#tryContant').html('test')</span></li>
+              <li>Find a reference to the img and replace the src attribute with some other image online? / <span class="red">$('img').attr('src', 'img/cat.jpg')</span></li>
+              <li>Find the element with an ID navBarListBox and show/hide it? / <span class="red">$('#navbarListBox').show()
+    </span></li>
+              <li>Find any li element that contains the text &quot;Lorem&quot; and add css underline -attribute to them? / <span class="red">$("li:contains('reference')").css('text-decoration', 'underline')</span></li>
+              <li>Find the items within the ID navbarListBox and apply css modifications of your choice to them. / <span class="red">$('#navbarListBox').children().next().css('font-size','150%');</span></li>
+            </ol>
+            <div id='tryContant'></div>
+            <img src="data:image/jpeg;base64,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" alt="Girl in a jacket" width="300" height="300"> 
+            <hr/>
+            <h2>Exercise 3: Effects and animation</h2>
+            <p>See: <a href="https://api.jquery.com/category/effects/" target="_blank">https://api.jquery.com/category/effects/</a></p>
+            <p>Add the following functionality to buttons below:</p>
+            <p>
+                <input type="button" name="button" id="button" value="Fade in H1">
+                <input type="button" name="button2" id="button2" value="Fade out H1">
+                <input type="button" name="button3" id="button3" value="SlideUp main contents">
+                <input type="button" name="button4" id="button4" value="SlideDown main contents">
+                <input type="button" name="button5" id="button5" value="Animate">
+            </p>
+            <ol>
+                <li>Fade in the main heading of the page</li>
+                <li>Fade out the main heading of the page</li>
+                <li>SlideUp the main contents of the page</li>
+                <li>SlideDown the main contents of the page</li>
+                <li>Study the animate() -function. Write an animation sequence of your own on the page</li>
+            </ol>
+            <hr/>
+            <h2>Exercise 4: Ajax</h2>
+            <ol>
+                <li>First try Ajax with console. Use load() -function to inject content from the web (ex. <a href="http://www.iltalehti.fi/rss.xml" target="_blank">http://www.iltalehti.fi/rss.xml</a>) into the div below.</li>
+                <li>Then write a JavaScript function, which will fire when the pulldown menu item is changed. Each selection loads a different content from web to the div below. </li>
+                <li>Change the pulldown item names accordingly as well.</li>
+            </ol>
+            <p>Select an item from the list.</p>
+            <p>
+                <select name="mySelect" id="mySelect" onchange="">
+                    <option value="first">Yahoo</option>
+                    <option value="second">Second item</option>
+                    <option value="third">Third item</option>
+                </select>
+            </p>
+            <div id="ajax">
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <script>
+            // <!-- JavaScript goes here -->
+            $('#button').click(function() {
+
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                $('h1').hide();
+                $('h1').fadeIn(1800);
+            });
+            $('#button2').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                $('h1').fadeOut(1800);
+            });
+            $('#button3').click(function() {
+                $('#main-content').slideUp(1800);
+            });
+            $('#button4').click(function() {
+                $('#main-content').hide();
+                $('#main-content').slideDown(1800);
+            });
+            $('#button5').click(function() {
+                $('#button5').animate({width: "550px", fontSize: "150%"}, 1800);
+                $('#button5').animate({width: "150px", fontSize: "13.3333px"}, 1800);
+            });
+            $('#mySelect').change(function() {
+                if(this.value == 'first') {
+                    $('#ajax').load('https://meijastiina.github.io/news_rss_topstories.xml');
+                } else if (this.value == 'second') {
+                    $('#mySelect option:selected').text('iltalehti');
+                    
+                    $('#ajax').load('http://www.iltalehti.fi/rss.xml');
+                } else {
+                    $('#ajax').html('Not found');
+                }
+            });
+        </script>
+    </body>
+</html>
