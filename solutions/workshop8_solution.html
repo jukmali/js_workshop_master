@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<head>
+		<title>Workshop 8 - Suggested Solutions</title>
+		<meta charset="utf-8">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body class="ws8">
+        <h1>Workshop 8: Parsing JSON/XML with AJAX</h1>
+        <hr />
+        <p>In this exercise we will practice the use of JSON in our JavaScript applications. Use the lecture-material as a reference guide side by side these exercises. </p>
+
+        <h2>Exercise 1: JSON Basics</h2>
+        <p>JSON means JavaScript Object Notations, and it means that we will represent data in a format which JavaScript understands as such. No conversions are necessary to use it.</p>
+        <p>
+          <button onclick="displayName()">Display the first and lastname only</button>
+          <button onclick="displayAll()">Display all data</button>
+        </p>
+        <p>Let's try the following. You can create a new JSON dataset in your JavaScript as described below. Then create functions, which will run when the buttons are clicked.</p>
+
+        <pre>
+            var text = '{ "employees" : [' +
+                '{ "firstName":"John" , "lastName":"Doe" },' +
+                '{ "firstName":"Anna" , "lastName":"Smith" },' +
+                '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+        </pre>
+        <ul>
+            <li>The First button will display the first and lastname for each item in the div below.</li>
+            <li>The Second button will display all the data for all items in the div below. If you wish, you can use for-loops here.</li>
+        </ul>
+        <div id="jsondata">JSON data goes here.</div>
+        <h2>Exercise 2: Parsing JSON from web</h2>
+        <p>&nbsp;Below you see two buttons. Edit the source code and add an onClick-events to these buttons. Add functionality to these as described below.</p>
+        <button onclick=" loadJSONDoc()">Load raw data</button>
+        <button onclick=" loadJSONDocWithParse()">Load and parse the data</button>
+        <ul>
+          <li>The first button should run a JavaScript-function, which will load the given <a href="http://www.omdbapi.com/?s=star+wars&apikey=cbbc6750">JSON file from the web </a>and display the raw contents of it on the DIV-below (id=rawdata). Use Developer tools (F12) to track the AJAX call and study the headers, execution times etc.</li>
+          <li> The second button should run a function, will load the same data, but will parse the data out and display it as a table.</li>
+          <li> After you have managed to get the data out, try to load the pictures to the page as well.</li>
+        </ul>
+        <div id="rawdata">Raw data goes here.</div>
+        <h2>Exercise 3: Real Life Challenge: OpenWeatherMap API </h2>
+        <p>OpenWeatherMap is a well known weather data provider online. It offers an API which allow developers to fetch data about weather. The <a href="https://openweathermap.org/api">documentation can be found here</a>.
+        Your task is to write a Weather APP, which will display the weather information based on the users wishes. <b>Notice, that you will need to sign up (its free) to get the API key, which allows you to use the service.</b></p>
+
+        <p>Sample call to the REST API could be like this: <a href="http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2">http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2
+        </a>. Click to see the response.</p>
+        <ul>
+            <li>First develop the app to display raw weather information (Temperature, Clouds, Humidity) on one spesific city, when the button is clicked. <button>Get data</button> </li>
+            <li>When you achieve this, then parse the data and output it to div</li>
+            <li>When you have achieved this, implement an onchange-event on the pulldown menu, which will allow the user to select which city's data will be shown from a list of cities</li>
+            <li>When you have completed this, add functionality to an input field, in which the user can write search queries which are sent to the OpenWeatherMap API and the system will run a search query which is retuned to your app.</li>
+        </ul>
+        <p>Select a city from the list:
+        <select name="mySelect" id="city" onchange="weatherSelect()">
+            <option value="Helsinki">Helsinki</option>
+            <option value="Stockholm">Stockholm</option>
+            <option value="Rome">Rome</option>
+            <option value="New York">New York</option>
+         </select></p>
+        <p>Or type in a search query: <input id="citysearch"><button id="search" onclick="weatherSearch()">Search</button></p>
+        <div id="weatherdata">Weatherdata goes here.</div>
+        <script>
+            // JavaScript goes here
+            // EX1
+            function displayName(){
+                // Data as text in JSON format
+                var text = '{ "employees" : [' +
+                    '{ "firstName":"John" , "lastName":"Doe" },' +
+                    '{ "firstName":"Anna" , "lastName":"Smith" },' +
+                    '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+                // Convert the data to JSON
+                var data = JSON.parse(text);
+                // Extract the data from JSON
+                var firstName = data.employees[0].firstName;
+                var lastName = data.employees[0].lastName;
+                // Inject the data to jsondata HTML element
+                document.getElementById('jsondata').innerHTML = firstName + " " + lastName;
+            }
+            // Create a for loop
+            function displayAll(){
+                var text = '{ "employees" : [' +
+                    '{ "firstName":"John" , "lastName":"Doe" },' +
+                    '{ "firstName":"Anna" , "lastName":"Smith" },' +
+                    '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+                // Convert the data to JSON
+                var data = JSON.parse(text);
+                // Clear the field
+                document.getElementById('jsondata').innerHTML = "";
+                for (var i=0; i < data.employees.length; i++){
+                    // Extract the data from JSON
+                    var firstName = data.employees[i].firstName;
+                    var lastName = data.employees[i].lastName;
+                    // Inject the data to #jsondata
+                    document.getElementById('jsondata').innerHTML += firstName + " " + lastName + "<br>";
+                } // end for
+                // EX2: If the CORS-issue is preventing the data to be loaded, we can just use local variable
+				}
+				var JSONdata;
+                    
+            
+            // If CORS-issue is fine (IE seems to work), we can fetch the data using AJAX
+            // Define a variable which can be used globally
+            var jsonObj;
+            function loadJSONDoc() {
+				//alert("Doc");
+                //var url = "http://api.openweathermap.org/data/2.5/weather?q=Kirkkonummi&appid=7cc51fa62b0b257066d44923817d4830";
+				var url = "http://www.omdbapi.com/?s=star+wars&apikey=cbbc6750";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						//alert("DOC jatkuu");
+                        document.getElementById("rawdata").innerHTML = xmlhttp.responseText;
+                        // Receive the response as JSON and parse it into a JS variable
+                        jsonObj = JSON.parse(xmlhttp.responseText);
+                        // We can now use it as any JS variable
+                        console.log ( jsonObj[0].name.first );
+                        console.log ( jsonObj[3].age );
+                        // Just output the raw data
+                        document.getElementById("rawdata").innerHTML = xmlhttp.responseText;
+                    } 
+                } 
+				
+                // Hakee paikallisesti
+				loadJSONdata();
+				document.getElementById("rawdata").innerHTML = JSONdata;
+            }
+            function loadJSONDocWithParse() {
+				//alert("Parse");
+                //var url = "http://iceberg-cycle.codio.io/Project%202:%20Weather%20App/sampledata.js";
+                var url = "http://www.omdbapi.com/?s=star+wars&apikey=cbbc6750";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        //	document.getElementById("content").innerHTML = xmlhttp.responseText;
+                        jsonObj = JSON.parse(xmlhttp.responseText);
+                        console.log(jsonObj);
+                        // Call for a function which will parse the data to a table
+                        printJSONTable(jsonObj);
+                    }
+
+                } 
+                // Hakee paikallisesti
+                // loadJSONdata();
+				// printJSONTable(JSONdata);
+            }
+            function printJSONTable(jsonObj) {
+                // JSON data is stored in data variable
+                var data = jsonObj;
+                // Create a loop, which will run through the JSON data array. All the data will be collected to out -variable
+                var out = "<table>";
+                
+                for (var i=0; i < data.Search.length; i++){
+                    
+                    // for each loop round, we will 'create a new table for <tr> -tag and append (+=) the data to existing out -variable
+                    out += '<tr>';
+                    // For each cell, we will output data fields from JSON
+                    out += '<td>' + data.Search[i].Title + '</td>';
+                    out += '<td>' + data.Search[i].Year + '</td>';
+                    out += '<td>' + data.Search[i].imdbID+ '</td>';
+                    out += '<td>' + data.Search[i].Type + '</td>';
+                    //out += '<td><img src="'+ data.Search[i].Poster+'"></td>';
+                    out += '</tr>';
+                }
+                // After all the data has been set, we will output closing tag for the table
+                out+="</table>";
+                // Place the newly created table in tabledata-div
+                document.getElementById("rawdata").innerHTML = out;
+            }
+
+            function printJSONWeatherTable(jsonObj) {
+                // JSON data is stored in data variable
+                var data = jsonObj;
+                // Create a loop, which will run through the JSON data array. All the data will be collected to out -variable
+                var out = "<table>";
+                // alert(data.main.temp)
+                    
+                out += '<tr>';
+                // For each cell, we will output data fields from JSON
+                out += '<td>' + 'City: '+ data.name + '</td>'
+                out += '<td>' + 'Temperature: '+ data.main.temp + '</td>';
+                out += '<td>' + 'Clouds: '+ data.weather[0].description + '</td>';
+                out += '<td>' + 'Humidity: '+ data.main.humidity + '</td>';
+                out += '<td>' + 'Icon: '+'<img src="' + data.weather[0].icon + '"></td>';
+                
+                out += '</tr>';
+                
+                // After all the data has been set, we will output closing tag for the table
+                out+="</table>";
+                // Place the newly created table in tabledata-div
+                document.getElementById("weatherdata").innerHTML = out;
+            }
+            function weatherSelect(){
+                var selection = document.getElementById("city");
+                var city = selection.options[selection.selectedIndex].value;
+                var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        //	document.getElementById("content").innerHTML = xmlhttp.responseText;
+                        jsonObj = JSON.parse(xmlhttp.responseText);
+                        console.log(jsonObj);
+                        // Call for a function which will parse the data to a table
+                        printJSONWeatherTable(jsonObj);
+                    }
+                }
+            }
+
+            function weatherSearch(){
+            var selection = document.getElementById("citysearch");
+            var city = selection.value;
+            var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //	document.getElementById("content").innerHTML = xmlhttp.responseText;
+                    jsonObj = JSON.parse(xmlhttp.responseText);
+                    console.log(jsonObj);
+                        // Call for a function which will parse the data to a table
+                        printJSONWeatherTable(jsonObj);
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
