@@ -1,0 +1,270 @@
+<!doctype html>
+<HTML lang="en">
+    <head>
+        <title>Workshop 4 Solution</title>
+		<meta charset="utf-8">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+	<body>
+		<h1>Workshop 4: DOM Scripting</h1>
+		<hr />
+		<p>In this exercise we will practice the art of DOM Scripting with JavaScript. Use the lecture-material as a reference guide side by side these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use. </p>
+        <hr/>
+		<h2>Exercise 1: Basic  DOM Manipulation</h2>
+		<p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons. Use Developer Console to find the </p>
+		<p>
+			<button onclick="firstButton();">Button 1</button>
+			<button onclick="secondButton();">Button 2</button>
+			<button onclick="thirdButton();">Button 3</button>
+		</p>
+		<ul>
+			<li>The first button should run a JavaScript-function, which will find the reference to &quot;Workshop 4&quot; heading on this page and change the contents of it to &quot;Modified Heading!&quot;. </li>
+			<li> The second button should run a function, which will modify the style of the &quot;Exercise 2&quot; heading on this page. JavaScript should change at least the font size, style and 
+color and the background color</li>
+			<li>The third button should append the following text paragraph after the <strong>4th paragraph tag &lt;p&gt;</strong> on the page (without overwriting the current content). Change the background of the entire page as well. Note: The Lorem ipsum text should be in italics. It should also add a logo image of some sort after the text.</li>
+        </ul>
+        <strong id="lorem"><em>&quot;Lorem ipsum</em></strong><em> dolor sit amet, consectetuer   adipiscing elit. Sed posuere interdum sem. 
+        Quisque ligula eros   ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam   vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget   velit. &quot;</em>
+        <hr/>
+		<h2>Exercise 2: DOM Traversing using ID's and classes</h2>
+		<p class="surprise">Add onchange -events to following checkboxes.</p>
+		<p>
+            <label>
+                <input onchange="hideMe()" name="CheckboxGroup1" type="checkbox" id="CheckboxGroup1_0" title="Actions" value="1">
+                Hide me 
+            </label>
+            <br>
+            <label>
+                <input onchange="show()" type="checkbox" name="CheckboxGroup1" value="2" id="CheckboxGroup1_1">
+                Show me
+            </label>
+            <br>
+            <label>
+                <input onchange="surprise()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2">
+                Surprise
+            </label>
+		</p>
+		<ul>
+			<li>First checkbox: Find out which element has been described with the id &quot;data&quot;. Change the visibility (display value) of 
+		the element to none. What happens?</li>
+			<li>Second checkbox should return the visibility of the element to a normal state (block).</li>
+			<li>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
+		</ul>
+        <div id="me" class="red-box"></div>
+        <p>&nbsp;</p>
+		<hr/>
+        <h2>Exercise 3: Images and pulldowns</h2>
+		<ul>
+            <li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
+            <li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
+            <li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.</li>
+        </ul>
+        <p>Select a new car from the list.</p>
+		<select name="mySelect" id="mySelect" onchange="changeImage()">
+			<option value="BMW">BMW</option>         
+			<option value="Audi">Audi</option>
+			<option value="Mercedes">Mercedes</option>
+			<option value="Volvo">Volvo</option>
+		</select>
+		<br>
+		<br>
+		<img onmouseover="showBorder()" onmouseout="hideBorder()" style="left: 0px; opacity: 1;" src="
+http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage" alt="" />
+        <hr/>
+		<h2>Exercise 4: Moving things around</h2>
+		<ul>
+			<li>
+				<p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
+				<ol>
+                    <li>
+                        <button onclick="changePosition()">Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</button>
+                    </li>
+                    <li>
+                        <button onclick="setInterval(function(){doMove();},1000); "> Write a timed loop (Interval) which  will move the image across the screen, or even better: back and forth on  the screen.</button>
+                    </li>
+                    <li>
+                        <button onclick="setInterval(function(){fadeOut();},250);"> Write  a timed loop (Interval) which will slowly decrease the opacity of the image from 100 to  0 making it fade out</button>
+                    </li>
+                    <li>
+                        <button onclick="hide()"> Finally, write JavaScript which will remove the image from the page</button>
+                    </li>
+				</ol>
+			</li>
+		</ul>
+        <hr/>
+        <h2>Exercise 5: Tables</h2>
+        <ul>
+            <li class="surprise">Write a JavaScript function to  add rows to a table. Rows can contain preset values.</li>
+            <li>When your code is working, try reading the content to be added from a set of fields below the table.</li>
+        </ul>
+        <br>
+        <table id="data" class="display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>$320,800</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Accountant</td>
+                    <td>$170,750</td>
+                </tr>
+                <tr>
+                    <td>Ashton Cox</td>
+                    <td>Junior Technical Author</td>
+                    <td>$86,000</td>
+                </tr>
+                <tr>
+                    <td>Cedric Kelly</td>
+                    <td>Senior Javascript Developer</td>
+                    <td>$433,060</td>
+                </tr>
+                <tr>
+                    <td>Airi Satou</td>
+                    <td>Accountant</td>
+                    <td>$162,700</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Name
+            <label for="textfield">:</label>
+            <input type="text" name="textfield" id="textfield">
+            <br>
+            Position:
+            <input type="text" name="textfield2" id="textfield2">
+            <br>
+            Salary: 
+            <input type="text" name="textfield3" id="textfield3">
+            <br>
+            <input type="button" onclick="insertRows()" name="Insert" id="Insert" value="Insert">
+        </p>
+        <hr/>
+        <h2>Bonus exercises for the enthusiastics</h2>
+		<ul>
+			<li dir="ltr">
+				<p dir="ltr">Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
+			</li>
+			<li dir="ltr">How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li>
+		</ul>
+        <script>
+            <!-- JavaScript goes here -->
+            <!-- Assignment 1 -->
+            function firstButton(){
+                document.getElementsByTagName('h1')[0].innerHTML = "Modified Heading";
+            }
+            function secondButton(){
+                document.getElementsByTagName('h2')[1].style = "font-family: Arial";
+                document.getElementsByTagName('h2')[1].style = "color: green";
+                document.getElementsByTagName('h2')[1].style = "background: yellow";
+            }
+            function thirdButton(){
+                var ptags = document.getElementsByTagName('p');
+                var emtags = document.getElementsByTagName('em');
+                ptags[3].innerHTML += emtags[1].innerHTML;
+            }
+            <!-- Assignment 2 -->
+            function hideMe(){
+                document.getElementById('me').style = "display: none";
+            }
+            function show(){
+                document.getElementById('me').style = "display: block";
+            }
+            function surprise() {
+                var elements = document.getElementsByClassName('surprise');
+                for(var i=0; i<elements.length; i++) {
+                    elements[i].style = "font-size: 20px;"
+                }
+            }
+            <!-- Assignment 3 -->
+            function showBorder(){
+                document.getElementById('carimage').style ="border: 3px solid black";
+            }
+            function hideBorder(){
+                document.getElementById('carimage').style ="border: 0px solid black";
+            }
+            function changeImage(){
+                var data = document.getElementById('mySelect').value;
+                var image = document.getElementById('carimage');
+                alert("Your selection: "+data);
+                if (data == "Audi") {
+                    image.src = "http://o.aolcdn.com/commerce/autodata/images/USC70AUC017A021001.jpg";
+                }
+                else if (data =="BMW")  {
+                    image.src = "http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg";
+                }
+                else if (data =="Mercedes")  {
+                    image.src = "http://st.motortrend.com/uploads/sites/10/2016/09/2017-mercedes-benz-s-class-maybach-s600-sedan-angular-front.png";
+                }
+                else if (data =="Volvo")  {
+                    image.src = "http://o.aolcdn.com/commerce/autodata/images/USC40VOC172G021001.jpg";
+                }
+            }
+            <!-- Assignment 4 -->
+            // List item 1
+            function changePosition(){
+                document.getElementById('carimage').style.position = "relative";
+                document.getElementById('carimage').style.top="+500px";
+                document.getElementById('carimage').style.left="-200px";
+            }
+            //Item 2
+            // Call doMove() function every 1000 ms = every 1 seconds.
+            function animate(){
+                setInterval(function(){doMove();},1000);
+            }
+            // We store the left position value and increase the existing value by 10 px every time doMove is called
+            function doMove() {
+                // Find the image
+                var img = document.getElementById('carimage');
+                // Use relative positioning on page
+                img.position = "relative";
+                // Store the current value of left position (defined in HTML)
+                var left = parseInt(img.style.left);
+                img.style.left = (left+10)+'px';
+                console.log("Moved to "+left+"px");
+            }
+            //3
+            function fadeOut(){
+                setInterval(function(){doFadeOut();},1000);
+            }
+            function doFadeOut(){
+                var img = document.getElementById('carimage');
+                // Store the current value of opacity (defined in HTML)
+                var opac = parseInt(img.style.opacity);
+                // Reduce the value of current opacity by 0.1
+                img.style.opacity -= 0.1;
+            }
+            //4
+            function hide(){
+                document.getElementById('carimage').style.display="none";
+            }
+            <!-- Assignment 5 -->
+            function insertRows(){
+                // Find a <table> element with id="myTable":
+                var table = document.getElementById("data");
+                // Create an empty <tr> element and add it to the bottom position of the table:
+                var row = table.insertRow();
+                // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                // read the values of the fields on page
+                var name = document.getElementById('textfield').value;
+                var position  = document.getElementById('textfield2').value;
+                var salary = document.getElementById('textfield3').value;
+                // Add some text to the new cells:
+                cell1.innerHTML = name;
+                cell2.innerHTML = position;
+                cell3.innerHTML = salary;
+            }
+        </script>
+    </body>
+</html>
