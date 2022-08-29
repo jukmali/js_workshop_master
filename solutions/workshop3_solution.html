@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Workshop 3 Solutions</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body class="ws3">
+        <h1>Workshop 3: JavaScript Events</h1>
+        <hr />
+        <p>In this exercise we will practice the use of BOM and the JavaScript events. Use the lecture-material as a reference guide side by side these exercises. It might also be a good idea to save the lines of code you write during the exercises for later use.</p>
+        <h2>Exercise 1</h2>
+        <p>&nbsp;Below you will see three buttons. Edit the source code and add an onClick-events to these buttons.</p>
+        <p>
+            <button onclick="alert('Clicked me!' + new Date())" >Click me</button>
+            <button onclick="showDate();" >Show Date</button>
+            <button onclick="showTable2();">Show Table</button>
+            <button onclick="geoLocation()">Geolocation</button>
+        </p>
+        <ol>
+            <li>The first button should open an alert-button, which will say "You clicked me!" </li>
+            <li> When you see the button working, add the current date after the text by using the Date() -function.</li>
+            <li>The second button should call a function called showTable()". ShowTable function should output a simple HTML-table (below) to the page. Feel free to modify the data on the table.</li>
+        </ol>
+        <div id="table-here"></div>
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>$320,800</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Accountant</td>
+                    <td>$170,750</td>
+                </tr>
+                <tr>
+                    <td>Ashton Cox</td>
+                    <td>Junior Technical Author</td>
+                    <td>$86,000</td>
+                </tr>
+                <tr>
+                    <td>Cedric Kelly</td>
+                    <td>Senior Javascript Developer</td>
+                    <td>$433,060</td>
+                </tr>
+                <tr>
+                    <td>Airi Satou</td>
+                    <td>Accountant</td>
+                    <td>$162,700</td>
+                </tr>
+              
+            </tbody>
+        </table>
+        <ol start="4">
+            <li>The last button should check Geolocation of the user, and output it to the console and to the page.</li>
+        </ol>
+        <hr/>
+        <h2 onmouseover="console.log('Stepped over my a mouse!');" onmouseleave="alert('Bye bye mouse!');" >Exercise 2</h2>
+        <ul>
+            <li>Add an&nbsp;onMouseOver event on the&nbsp;Heading "Exercise 2" of this page.&nbsp;It should&nbsp;fire when the users mouse is moved 
+over&nbsp;it. Output "Stepped over my a mouse!" on the console.</li>
+            <li>Add another event, which will fire then the mouse leaves the Exercise 2 -heading. This time show an alert window to the user saying: "Bye bye mouse!"</li>
+        </ul>
+        <hr/>
+        <h2>Exercise 3</h2>
+        <p>Below you will see a simple form.</p>
+        <ul>
+            <li>Add onfocus -event to the&nbsp;textarea below. When the user enters the textarea, it should show a text saying: "Please fill in the form with proper data.". &nbsp;</li>
+            <li>Try to use onkeydown -event on the textarea. It should calculate the number of keypresses and output them on the screen. Could you think other smart ways to use it?</li>
+            <li>When the form button is clicked, check if the textarea is empty. Notify the user with appropriate message. HINT: You can access the Textarea using the following command:   <i>document.getElementById("textdata").value</i>. We will study the forms deeper in Workshops 4 and 5.</li>
+        </ul>
+<!-- NOTE! If you remove the form tags, we can use the onclick event in the button as we've done before. If we are using FORM-tags, we need to place the validation tags in form onsubmit - event. Otherwise the page gets refreshed when we click the button. We can cancel the submission of a form  by using "return validate()" on the event and return false in our validate() function if the field is not empty.
+-->
+        <form onsubmit="return validate(this);">
+            <textarea onkeydown="count();" onfocus="attention();" id="textdata"></textarea><br>
+            <h3 id="counter"></h3>
+            <button>Send me</button>
+        </form>
+        <hr/>
+        <h2>Exercise 4</h2>
+        <div onmousemove="showXY(event);" id="coordinates"></div>
+        <p>Mouse over the rectangle above, and get the coordinates of your mouse pointer.</p>
+        <p>When the mouse is moved over the div, use document.write to display the horizontal and vertical coordinates of your mouse pointer, whose values are returned from the X and Y properties on the MouseEvent object.</p>
+        <script>
+            <!-- JavaScript goes here -->
+            // This counter is used to keep in track of the keypresses
+            // It has to be declared here, so that it doesnt get reset on every keypress
+            var counter= 0;
+            // EXERCISE 1:
+            // button 1
+            // Displays a date with custom format on the screen
+            function showDate(){
+                var d = new Date();
+                var day = d.getDate();
+                var month = d.getMonth()+1;
+                var year = d.getFullYear();
+                var current = day+"/"+month+"/"+year;
+                alert(current);
+            }
+            // button 2
+            // Outputs an html table on the page
+            function showTable(){
+                document.getElementById('table-here').innerHTML = "<table border='1'><tr><td>First column</td><td>Two second</td></tr></table>";
+            }
+            // Optional: use backticks
+            function showTable2(){
+                var html = `
+                <table id="example" class="display" cellspacing="0" width="100%">
+                   <thead>
+                      <tr>
+                         <th>Name</th>
+                         <th>Position</th>
+                         <th>Salary</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr>
+                         <td>Tiger Nixon</td>
+                         <td>System Architect</td>
+                         <td>$320,800</td>
+                      </tr>
+                      <tr>
+                         <td>Garrett Winters</td>
+                         <td>Accountant</td>
+                         <td>$170,750</td>
+                      </tr>
+                      <tr>
+                         <td>Ashton Cox</td>
+                         <td>Junior Technical Author</td>
+                         <td>$86,000</td>
+                      </tr>
+                   </tbody>
+                </table>
+                `;
+                document.write( html );
+            }
+            // button 3
+            function geoLocation() {
+                var options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                };
+                navigator.geolocation.getCurrentPosition(success, error, [options]);
+                function success(pos) {
+                    var text = 'Your current position is: latitude: ' + pos.coords.latitude + ' longitude: ' + pos.coords.longitude;
+                    console.log(text);
+                    document.write(text);
+
+                }
+                function error() {
+                    console.warn(`ERROR(${err.code}): ${err.message}`);
+                }
+            }
+            // Ex1. Button 3
+            function printArrayData(){
+                document.write("<table border='1'>");
+                for (var i=0; i < persons.length; i+=3){
+                    document.write("<tr><td>" + persons[i] + "</td><td>" + persons[i+1] + "</td><td>" + persons[i+2] + "</td></tr>");
+                }
+                document.write("</table>");
+            }
+            // EXERCISE 3
+            function count(){
+                // Increase the number on keypresses
+                counter++;
+                // Find an element with an id "counter" and place the variable there
+                document.getElementById('counter').innerHTML = counter;
+            }
+            function attention(){
+                // Find the element with an id "textbox" on the page
+                var textbox = document.getElementById('textdata');
+                // Change the contents
+                textbox.value='Please fill in with proper data!'
+                // Change the background to red
+                textbox.style ="background: red";
+            }
+            function validate(){
+                var textbox = document.getElementById('textdata');
+                // If the field is empty
+                if (textbox.value == ''){
+                    alert("Field is empty!");
+                    return false;
+                }
+            }
+            function showXY(event){
+                var x = event.clientX;
+                var y = event.clientY;
+                var coords = "X coords: " + x + ", Y coords: " + y;
+                document.getElementById("coordinates").innerHTML = coords;
+            }
+        </script>
+    </body>
+</html>
