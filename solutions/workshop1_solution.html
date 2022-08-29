@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshop1</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Workshop 1 - Solutions</h1>
+    <hr/>
+    <h2>3. Conditionals</h2>
+    <script>
+        // 3. Conditionals
+        var x = 50;
+        var order = 'Beer';
+        if (x > 50) {
+            document.write("<strong>He's over 50!</strong>" );
+            console.log("He's over 50!")
+        } else if (x <= 50 && x > 30){
+            document.write("<p>Middle aged man, who ordered some " + order + "</p>");
+        } else
+            document.write("<h3>It seems you're bit underaged.</h3>");
+        // 4. Loops
+        document.write('<hr/><h2>4. Loops</h2><ol>')
+        var arr = [];
+        for (var i=0; i<15; i++) {
+            arr.push( Math.floor((Math.random() * 100) + 1));
+            console.log(arr[i]);
+            document.write('<li>' + arr[i] + '</li>');
+        }
+        document.write('</ol>')
+        console.log(arr);
+        // 5. Functions
+        document.write('<hr/><h2>5. Functions</h2>')
+        // Returns true if age is over 18, otherwise returns false
+        function areYouOldEnough(age) {
+            if (age < 18){
+                console.log('FALSE: Age is ' + age);
+                return false;
+            }else
+                console.log('true');
+                return 'TRUE: Age is ' + age;
+        }
+        // Call the function and pass the returned value to the console or to the document
+        console.log( areYouOldEnough(16) );
+        document.write( areYouOldEnough(19) );
+        // Call the value and pass the returned value to alert();
+        alert(areYouOldEnough(5));
+        alert(areYouOldEnough(25));
+        // 6. Objects
+        var people = [
+            {
+                firstname: 'John',
+                lastname: 'Doe',
+                age: 50,
+                eyeColor: 'blue',
+                address: 'Street 12 901290 City',
+                phone: '123435',
+                printInfo: function() {return(this.firstname + ' ' + this.lastname + '<br/>')}
+            },
+            {
+                firstname: 'Robert',
+                lastname: 'Smith',
+                age: 22,
+                eyeColor: 'brown',
+                address: 'Street 12 901290 City',
+                phone: '123435',
+                printInfo: function() {return(this.firstname + ' ' + this.lastname + '<br/>')}
+            }
+        ]
+        var text="<hr/><h2>6. Objects</h2>";
+        for(i=0; i<people.length; i++) {
+            text += people[i].printInfo();
+        }
+        document.write(text);
+        // INDEPENDENT EXERCISES
+        // Dog's Age
+        document.write("<hr/><h2>Independent Exercises 1</h2><h3>Dog's Age</h3>");
+        function dogsAge(age) {
+            return age * 7
+        }
+        document.write("<p>Man's age 7 is " + dogsAge(7) + " in dog's age</p>");
+        document.write("<p>Man's age 10 is " + dogsAge(10) + " in dog's age</p>");
+        //Debugging a Script
+        document.write("<h3>Debugging a Script</h3>");
+        var i = 5;
+        var j = 10;
+        var k = 25;
+        var l = "Joe";
+        if (i < j) {
+            console.log("i");
+        }
+        else if (j > k) {
+            console.log("k");
+        }
+        else {
+            console.log("j");
+        }
+        var arr = [3, 5, 7];
+        for (var i = 0; i <=3; ++i){
+            console.log(arr[i]);
+        }
+    </script>
+</body>
+</html>
