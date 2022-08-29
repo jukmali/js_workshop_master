@@ -21,14 +21,14 @@
                 <label>Email address:<br>
                     <input type="text" name="email" id="email">
                 </label>
-                <span>Please fill in this field</span>
+                <span id="feedback1">Please fill in this field</span>
             </div>
             <div class="no-border" id="comment-div">
                 <label>
                     Comment:<br>
                 </label>
                 <textarea name="comment" id="comment"></textarea>
-                <span>Please fill in this field</span>
+                <span id="feedback2">Please fill in this field</span>
             </div>
             <br>
             <input type="submit" value="Send">
@@ -41,10 +41,10 @@
         <p data-line="20">a)  the Costs-field should display the total costs of the subscription</p>
         <p data-line="22">b) If the user chooses to pay   for more than 2 years, he will get a 20% discount. Notify the user when   he is eligible to get the discount, by showing a text next to form.</p>
         <p data-line="24">c) Should he pay for 5 years or   more, he will get the normal 20% discount, but will also be given an   extra 5€ discount with a special greetings text on screen.</p>
-        <form action="#" method="post" id="theForm">
+        <form action="#" method="post" id="theForm"onsubmit="return calculateMembership1()" >
             <fieldset>
                 <legend>Create Your Membership</legend>
-                <p>Complete this form to calculate your membership. There's a 20% discount if you enroll for more than one year!</p>
+                <p>Complete this form to calculate your membership. There's a 20% discount if you enroll for more than two year!</p>
                 <div>
                     <label for="type">Type</label> 
                     <select name="type" id="type" size="4" required>
@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <label for="years">Years</label>
-                    <input type="number" name="years" id="years" min="1" required>
+                    <input oninput="amount_years()" type="number" name="years" id="years" min="1" required><span id='span_discount'></span>
                 </div>
                 <div>
                     <label for="cost">Cost</label>
@@ -93,6 +93,10 @@
                 <label for="discount">Discount</label>
                 <input type="text" name="discount" id="discount" value="0.00" required>
             </div>
+			<div>
+				<label for="shipping">Shipping</label>
+				<input type="text" name="shipping" id="shipping" value="0.00" required>
+			</div>
             <div>
                 <label for="total">Total</label>
                 <input type="text" name="total" id="total" value="0.00">
@@ -110,29 +114,140 @@
                 <p data-line="41">After choosing the box, the user is shown an   input field which asks detailed information regarding on the selected   contact method.</p>
           </li>
         </ul>
-        <script src="js/shopping.js"></script>
+		<form name="extra" action="#" onsubmit="validateExtra()" method="post">
+		<fieldset>
+			<legend>Contact information:</legend>
+			<p>First name: 
+				<input type="text" name="fname" id="fname"> </p>
+			<p>Last name:
+				<input type="text" name="lname" id="lname"> </p>
+				<div>
+                    <label for="cont">How to contact:</label> 
+                    <select onchange="validateExtra()" name="cont" id="cont" size="3" required>
+                        <option value="phone">Phone</option>
+                        <option value="e-mail">e-mail</option>
+                        <option value="sms">sms</option>
+                    </select>
+                </div>
+			
+		</fieldset>
+		<fieldset id="extraField">
+			<legend>Additional information</legend>
+			<p id="extra_text">email:</p>
+				<p><input type="text" name="email_2" id="email_2"> </p>
+			
+		</fieldset>
+				
+		<p>
+		<input type="submit" name="Submit" value="Submit">
+		</form>
+        <script src="js/shopping.js"></script> </p>
+		
         <script>
+            
+			// Exercise1 
             function validateFields () {
                 retVal = true;
                 let email = document.getElementById("email");
                 let comments = document.forms.contactForm.comment;
+                // Check e-mail
                 if (email.value == null || email.value.length < 6 || email.value.length > 15 || email.value.indexOf("@") < 0) {
                     email.parentNode.parentNode.classList.add("error");
+					let feed1 = document.getElementById("feedback1");
+					feed1.innerHTML = "Email length is not correct";
                     retVal = false;
                 } else {
+					document.getElementById("feedback1").innerHTML = "";
                     email.parentNode.parentNode.classList.remove("error");
                 }
+                // Check comment field
                 if (comments.value == null || comments.value.length < 1) {
                     comments.parentNode.classList.add("error");
+					document.getElementById("feedback2").innerHTML = "Comments field cannot be empty";
                     retVal = false;
                 } else {
                     if (retVal) {
+						
                         comments.parentNode.classList.remove("error");
-                        alert("Comments:\n" + comments.value + "\n\nemail:" + email.value);
+						let text = comments.value.substring(0,49);
+                        alert("Comments:\n" + text + "\n\nemail:" + email.value);
+						
+						
                     }
                 }
                 return retVal;
             }
+			
+			// exercise 2: Calculate membership
+			
+             //check
+             // if years are bigger than 2 extra infomation given
+             function amount_years(){
+                 var years = document.getElementById('years').value;
+                 if(years >= 5){
+                     
+                    document.getElementById('span_discount').textContent = "Extra discount 20% + 5€ discount as a long member customer"; 
+                 } else if (years > 2){
+                    document.getElementById('span_discount').textContent = "Extra discount 20%";
+                 } else {
+                    document.getElementById('span_discount').textContent = "";
+                 }
+                    
+            }
+            
+            // Membership calculation
+			function calculateMembership(){
+            
+			   var memSum = 0;
+				if(document.forms.theForm.type.value == null || document.forms.theForm.type.value == ""){
+					return false;
+				} else if (document.forms.theForm.type.value == "basic"){
+				    memSum += 10;
+				} else if (document.forms.theForm.type.value == "premium"){
+				    memSum += 15;
+				} else if (document.forms.theForm.type.value == "gold"){
+				    memSum += 20;
+				} else if (document.forms.theForm.type.value == "platinum"){
+				    memSum += 25;
+				}
+                // Multiplied with years
+				memSum *= document.forms.theForm.years.value;
+				
+                // If years are more than 2 20% discount
+				if(document.forms.theForm.years.value > 2){
+					memSum *= 0.8;
+				}
+                // If years are more than 5 then -5€ discount
+				if(document.forms.theForm.years.value >= 5){
+				    memSum -= 5;
+					// alert("Extra discount: 5€ ");
+				}
+				document.forms.theForm.cost.value = memSum;
+				
+				return false;
+			}
+
+            // Exercise 4 hidden extra fields
+			function validateExtra(){
+					// Find extra fields
+					var x = document.getElementById("extraField");
+                    // Show extra fields
+					x.style.display = "block";
+
+                    // Set the text according the selection
+					var selection = document.forms.extra.cont.selectedIndex;
+					if(selection== 0 || selection == 2){
+						document.getElementById("extra_text").innerHTML = "Please, give your phone number: ";
+						
+					} else {
+						document.getElementById("extra_text").innerHTML = "Please, give your e-mail address: ";
+						
+					}
+				return false;
+			}
+			
+			var x = document.getElementById("extraField");
+			x.style.display = "none";
         </script>
     </body>
 </html>
