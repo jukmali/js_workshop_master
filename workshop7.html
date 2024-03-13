@@ -48,15 +48,15 @@
 		</quotes>
 		<!-- THIS IS THE END  OF XML DATA -->
 		<hr/>
-		<h2>Exercise 2: AJAX call to an XML file </h2>
-		<p>Create an AJAX script, which will load the famous-quotes.xml file from the server: <a href="http://iceberg-cycle.codio.io/5: Asynchronous JavaScript (AJAX)/famous-quotes.xml" target="_blank">http://iceberg-cycle.codio.io/5: Asynchronous JavaScript (AJAX)/famous-quotes.xml</a> and inject the raw contents of the file to a div below (id="quotes"). Here's another alternative: <a href="http://quotes.rest/qod.xml" target="_blank">http://quotes.rest/qod.xml</a>. </p>
-		<p>NOTE: The raw XML data looks weird on the browser. You can use developer tools to study the contents by inspecting the DIV.</p>
+		<h2>Exercise 2: AJAX call to a JSON file </h2>
+		<p>Create an AJAX script, which will load the Star Wars file from the server: <a href="https://www.omdbapi.com/?s=star+wars&apikey=cbbc6750" target="_blank">https://www.omdbapi.com/?s=star+wars&apikey=cbbc6750</a>. </p>
+		<p>NOTE: The raw JSON data looks weird on the browser. You can use developer tools to study the contents by inspecting the DIV.</p>
 
 		<p>The sample function shown in PowerPoint slides is pasted below.</p>
 		<pre>
 			// Load AJAX content into web page
 
-			function loadXMLDoc() {
+			function loadJSONLDoc() {
 					// Create AJAX object
 					var xmlhttp = new XMLHttpRequest();
 
@@ -74,26 +74,26 @@
 		</pre>
 		<br>
 		<p>
-			<input type="button" name="Fetch2" id="Fetch2" value="Button" onclick="loadXMLFile()">
+			<input type="button" name="Fetch2" id="Fetch2" value="Button" onclick="loadJSONFile()">
 		</p>
 		<div id="quotes"></div>
 		<p>&nbsp;</p>
 		<hr/>
-		<h2>Exercise 3: Parsing the XML</h2>
+		<h2>Exercise 3: Parsing the JSON</h2>
 		<p>Continue working from exercise 2. Once you have injected the results, use JavaScript to parse the XML/JSON-file and output the file contents in a nice HTML-table below. Add some styles to the table.</p>
 		<p>
-			<input type="button" name="Fetch3" id="Fetch3" value="Button" onclick="loadAndParseXML()">
+			<input type="button" name="Fetch3" id="Fetch3" value="Button" onclick="loadAndParseJSON()">
 		</p>
 		<div id="tabledata">
 			<table>
 				<tbody>
 					<tr>
-						<td><strong>Quote</strong></td>
-						<td><strong>Author</strong></td>
+						<td><strong>Title</strong></td>
+						<td><strong>Poster</strong></td>
 					</tr>
 					<tr>
-						<td>Here goes the quote data</td>
-						<td>Here goes the author data</td>
+						<td>Here goes the title data</td>
+						<td>Here goes the poster data</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
